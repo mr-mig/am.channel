@@ -2,5 +2,5 @@
 module.exports = angular.module('am.channel', [
 
 ])
-		.provider()
+		.provider('Channels', require('./index'))
 ;
