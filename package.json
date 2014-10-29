@@ -1,0 +1,11 @@
+{
+  "name": "am.channel",
+  "version": "1.0.0",
+  "description": "ChannelsProvider - an abstraction on top of $rootScope and $scope. Gives the ability to channel source state changes to an unknown target state. Fire and forget mode.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mr_Mig",
+  "license": "MIT"
+}
