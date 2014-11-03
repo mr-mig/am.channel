@@ -9,5 +9,7 @@
   "author": "Mr_Mig",
   "license": "MIT",
   "dependencies": {
+    "am.convention": "git://github.com/mr-mig/am.convention#v1.0.2",
+    "angular-cjs": "git://github.com/mr-mig/angular-cjs#v1.0.0"
   }
 }

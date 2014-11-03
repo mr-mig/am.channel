@@ -1,5 +1,12 @@
 'use strict';
-module.exports = ChannelsProvider;
+var conv = require('am.convention');
+
+
+module.exports = {
+  factoryFn: ChannelsProvider,
+  moduleName: 'am.channel',
+  entityName: conv.globalNames.channels
+};
 
 // global registry
 var Channels = {};

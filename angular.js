@@ -1,8 +1,7 @@
 'use strict';
-var angular = require('angular');
+var angular = require('angular-cjs');
+var channels = require('./index');
 
-module.exports = angular.module('am.channel', [
-
-])
-		.provider('Channels', require('./index'))
-;
+// register channels provider using angular DI container
+module.exports = angular.module(channels.moduleName, [])
+  .provider(channels.entityName, channels.factoryFn);
