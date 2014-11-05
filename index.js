@@ -40,8 +40,8 @@ function Channel(name) {
 	this.tgt = [];
 
 	// transformation function
-	// (sourceState, targetState) -> targetState
-	this.transform = function (nothing, x) {
+	// (targetState, sourceState) -> targetState
+	this.transform = function (x, nothing) {
 		return x;
 	};
 }
@@ -103,7 +103,7 @@ function ChannelFactory($rootScope) {
 
 		var watchHandler = function (n, o) {
 			if (n !== o) {
-				this._dispatch(n);
+				this._dispatch(state);
 			}
 		}.bind(this);
 
@@ -126,7 +126,7 @@ function ChannelFactory($rootScope) {
 			var result = oldFn.apply(state, args);
 
 			// dispatch change when this method is called
-			this._dispatch(result);
+			this._dispatch(state);
 		}.bind(this);
 
 		return this;
@@ -137,7 +137,7 @@ function ChannelFactory($rootScope) {
 	};
 
 	Channel.prototype.with = function (fn) {
-		// sourceState, targetState -> targetState
+		// targetState, sourceState -> targetState
 		this.transformer = fn;
 		return this;
 	};
@@ -153,7 +153,7 @@ function ChannelFactory($rootScope) {
 
 		// binding to target scope so that listener deregisters automatically
 		return targetScope.$on(this.name, function (event, sourceState) {
-			state = this.transformer(state, sourceState);
+			this.transformer(state, sourceState);
 		}.bind(this));
 	};
 
