@@ -153,7 +153,15 @@ function ChannelFactory($rootScope) {
 
 		// binding to target scope so that listener deregisters automatically
 		return targetScope.$on(this.name, function (event, sourceState) {
-			this.transformer(state, sourceState);
+      var result = this.transformer(state, sourceState);
+      if (result === undefined){
+        console.log('Warning! The channel "' + this.name + '" have resetted the target state to "undefined"!' +
+          '\nFeels like a bug.' +
+          '\nYou should use a pure function inside channel.with().' +
+          '\nThis function should return transformed state object:' +
+          '\n' + this.transformer);
+      }
+			targetScope.state = result;
 		}.bind(this));
 	};
 
