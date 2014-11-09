@@ -1,6 +1,6 @@
 {
   "name": "am.channel",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "ChannelsProvider - an abstraction on top of $rootScope and $scope. Gives the ability to channel source state changes to an unknown target state. Fire and forget mode.",
   "main": "index.js",
   "scripts": {
