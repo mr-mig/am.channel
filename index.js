@@ -40,8 +40,8 @@ function Channel(name) {
 	this.tgt = [];
 
 	// transformation function
-	// (targetState, sourceState) -> targetState
-	this.transform = function (x, nothing) {
+	// (src, tgt) -> newTgt
+	this.transform = function (nothing, x) {
 		return x;
 	};
 }
@@ -126,7 +126,8 @@ function ChannelFactory($rootScope) {
 			var result = oldFn.apply(state, args);
 
 			// dispatch change when this method is called
-			this._dispatch(state);
+      // todo pass the source state anyway?
+			this._dispatch(result);
 		}.bind(this);
 
 		return this;
@@ -137,7 +138,7 @@ function ChannelFactory($rootScope) {
 	};
 
 	Channel.prototype.with = function (fn) {
-		// targetState, sourceState -> targetState
+		// (src, tgt) -> tgt
 		this.transformer = fn;
 		return this;
 	};
@@ -153,7 +154,7 @@ function ChannelFactory($rootScope) {
 
 		// binding to target scope so that listener deregisters automatically
 		return targetScope.$on(this.name, function (event, sourceState) {
-      var result = this.transformer(state, sourceState);
+      var result = this.transformer(sourceState, state);
       if (result === undefined){
         console.log('Warning! The channel "' + this.name + '" have resetted the target state to "undefined"!' +
           '\nFeels like a bug.' +
